@@ -8,3 +8,10 @@ b.proof = 1917336
 chain.push(b);
 
 exports.chain = chain;
+
+exports.nextBlock = function() {
+    return new Block(
+        chain[chain.length -1],
+        chain.length
+    )
+}
