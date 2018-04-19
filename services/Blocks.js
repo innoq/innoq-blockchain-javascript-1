@@ -1,5 +1,10 @@
+const Block = require("../model/block").Block
 const getBlocks = function(req, res) {
-	res.send("Blocks Service");
+	
+	
+	b = new Block(1);
+	
+	res.send(b);
 }
 
 exports.getBlocks = getBlocks;
