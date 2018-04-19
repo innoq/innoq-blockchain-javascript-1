@@ -1,6 +1,10 @@
 class Block {
     constructor(index) {
-        this.index = "0"
+        this.index = index;
+        this.timestamp = Date.now();
+        this.proof = null;
+        this.transactions = [];
+        this.previousBlockHash = null;
     }
 }
 
