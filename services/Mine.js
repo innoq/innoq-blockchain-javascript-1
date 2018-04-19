@@ -5,15 +5,25 @@ const mineBlock = function(req, res) {
     const blockCandidate = chain.nextBlockCandidate();
 
     let newHash = null;
-    let proof = 0;
+    let tryNumber = 0;
+    const startTime = Date.now();
     do {
-        blockCandidate.proof = proof;
+        blockCandidate.proof = tryNumber;
         newHash = hashBlock(blockCandidate);
-        proof++;
+        tryNumber++;
     } while (newHash.substring(0,6) !== "000000");
+    const elapsedTimeMillis = Date.now() - startTime;
 
     chain.saveBlock(blockCandidate);
-    res.send({"blockCandidate": blockCandidate, "newHash": newHash});
+    const seconds = elapsedTimeMillis / 1000
+    res.send({
+        "message": "Mined a new block in " + seconds + "s. Hashing power: " +  hashRate(tryNumber + 1, seconds) + " hashes/s.",
+        "block": blockCandidate 
+    });
+}
+
+function hashRate(tries, seconds) {
+    return Math.floor(tries / seconds);
 }
 
 exports.mineBlock = mineBlock;
