@@ -1,5 +1,5 @@
 const Block = require("./block").Block;
-const hashBlock = require("./helper").hashBlock;
+const hashBlock = require("../helper").hashBlock;
 
 const chain  = [];
 
@@ -13,7 +13,12 @@ exports.chain = chain;
 
 exports.nextBlockCandidate = function() {
     return new Block(
-        hashBlock(chain[chain.length -1]),
-        chain.length
+        hashBlock(chain[chain.length - 1]),
+        chain.length + 1
     );
+}
+
+exports.saveBlock = function(newBlock) {
+    chain.push(newBlock);
+    return chain;
 }

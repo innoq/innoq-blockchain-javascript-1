@@ -1,4 +1,4 @@
-const hashBlock = require("../model/helper").hashBlock;
+const hashBlock = require("../helper").hashBlock;
 const chain = require("../model/chain");
 
 const mineBlock = function(req, res) {
@@ -12,7 +12,7 @@ const mineBlock = function(req, res) {
         proof++;
     } while (newHash.substring(0,6) !== "000000");
 
-    // chain.saveBlock(blockCandidate);
+    chain.saveBlock(blockCandidate);
     res.send({"blockCandidate": blockCandidate, "newHash": newHash});
 }
 
