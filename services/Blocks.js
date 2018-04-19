@@ -1,5 +1,5 @@
-const service = function(req, res) {
+const getBlocks = function(req, res) {
 	res.send("Blocks Service");
 }
 
-exports.service = service;
+exports.getBlocks = getBlocks;

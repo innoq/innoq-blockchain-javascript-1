@@ -1,12 +1,12 @@
-const informationsHandler = require("./services/Information");
-const blocksHandler = require("./services/Blocks");
-const mineHandler = require("./services/Mine");
+const information = require("./services/Information");
+const blocks = require("./services/Blocks");
+const mine = require("./services/Mine");
 
 const express = require('express');
 const app = express();
 
-app.get('/', informationsHandler);
-app.get('/blocks', blocksHandler);
-app.get('/mine', mineHandler);
+app.get('/', information.getInfo);
+app.get('/blocks', blocks.getBlocks);
+app.get('/mine', mine.mineBlock);
 
-app.listen(3000);
+app.listen(3005);

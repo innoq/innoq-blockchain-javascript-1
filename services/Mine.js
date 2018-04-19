@@ -1,5 +1,5 @@
-const service = function(req, res) {
+const mineBlock = function(req, res) {
 	res.send("Mine Service");
 }
 
-exports.service = service;
+exports.mineBlock = mineBlock;
