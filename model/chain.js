@@ -3,11 +3,16 @@ const hashBlock = require("../helper").hashBlock;
 const transactionService = require("../services/Transaction");
 const Transaction = require("../model/transaction").Transaction;
 
-const chain  = createChain();
+let chain  = createChain();
 let sseStream = null;
 
 function createChain() {
     return [createGenesisBlock()];
+}
+
+function replaceChain(blocks) {
+    chain = blocks;
+    console.log(chain);
 }
 
 function createGenesisBlock() {
@@ -23,6 +28,7 @@ function createGenesisBlock() {
 }
 
 exports.chain = chain;
+exports.replaceChain = replaceChain;
 
 exports.nextBlockCandidate = function() {
     return new Block(

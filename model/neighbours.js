@@ -24,4 +24,5 @@ class Node {
 }
 
 exports.addNeighbour = addNeighbour;
+exports.neighbours = neighbours;
 exports.setSseStream = setSseStream;
