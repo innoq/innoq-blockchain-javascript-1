@@ -34,7 +34,7 @@ exports.nextBlockCandidate = function() {
 
 exports.saveBlock = function(newBlock) {
     chain.push(newBlock);
-    sseStream.sendEvent("new_block", newBlock);
+    sseStream && sseStream.sendEvent("new_block", newBlock);
     return chain;
 };
 
