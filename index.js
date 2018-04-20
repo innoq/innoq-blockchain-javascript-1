@@ -1,5 +1,5 @@
-const bodyParser = require('body-parser');
 
+const bodyParser = require('body-parser');
 const information = require("./services/Information");
 const blocks = require("./services/Blocks");
 const mine = require("./services/Mine");
@@ -8,6 +8,8 @@ const nodes = require("./services/Nodes");
 const events = require("./services/Events");
 const express = require('express');
 const app = express();
+
+const neighboursModule = require("./model/neighbours");
 
 function getArg(argName){
     const argDef = process.argv.filter(arg => arg.startsWith(argName + "="))[0];
