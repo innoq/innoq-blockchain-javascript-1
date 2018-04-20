@@ -9,9 +9,13 @@ const mineBlock = function(req, res) {
         let newHash = null;
         let tryNumber = 0;
         const startTime = Date.now();
+
+        const blockCandidateString = JSON.stringify(blockCandidate);
+        const firstPart = blockCandidateString.substring(0, blockCandidateString.indexOf(">!#") - 1);
+        const lastPart = blockCandidateString.substring(blockCandidateString.indexOf(">!#") + 4, blockCandidateString.length);
         do {
             blockCandidate.proof = tryNumber;
-            newHash = hashBlock(blockCandidate);
+            newHash = hashBlock(firstPart + tryNumber + lastPart);
             tryNumber++;
         } while (newHash.substring(0,6) !== "000000");
         const elapsedTimeMillis = Date.now() - startTime;

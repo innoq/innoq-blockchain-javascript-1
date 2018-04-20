@@ -1,7 +1,7 @@
 const hasher = require("hash.js");
 
-const hashBlock = function(block) {
-    return hasher.sha256().update(JSON.stringify(block)).digest("hex");
+const hashBlock = function(blockString) {
+    return hasher.sha256().update(blockString).digest("hex");
 }
 
 exports.hashBlock = hashBlock;

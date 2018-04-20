@@ -10,7 +10,10 @@ function createChain() {
 }
 
 function createGenesisBlock() {
-    const transaction = new Transaction({"id":"b3c973e2-db05-4eb5-9668-3e81c7389a6d","timestamp":0,"payload":"I am Heribert Innoq"});
+    const transaction = new Transaction("I am Heribert Innoq");
+    transaction.id = "b3c973e2-db05-4eb5-9668-3e81c7389a6d";
+    transaction.timestamp = 0;
+
     const transactionList = [transaction];
     const b = new Block(transactionList, "0", 1);
     b.timestamp = 0;
@@ -23,7 +26,7 @@ exports.chain = chain;
 exports.nextBlockCandidate = function() {
     return new Block(
         transactionService.getUpToFiveTransactions(),
-        hashBlock(chain[chain.length - 1]),
+        hashBlock(JSON.stringify(chain[chain.length - 1])),
         chain.length + 1
     );
 }
