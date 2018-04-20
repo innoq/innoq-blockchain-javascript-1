@@ -1,14 +1,16 @@
 const neighbours  = [];
 
-function addNeighbour(node) {
-
+function addNeighbour(id, host) {
+    const neighbour = new Node(id, host)
+    neighbours.push(neighbour);
+    return neighbour;
 }
 
 class Node {
-    constructor(nodeId, host) {
-        this.nodeId = nodeId;
+    constructor(id, host) {
+        this.id = id;
         this.host = host;
     }
 }
 
-exports.neighbours = neighbours;
+exports.addNeighbour = addNeighbour;

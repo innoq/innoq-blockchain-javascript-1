@@ -4,6 +4,7 @@ const information = require("./services/Information");
 const blocks = require("./services/Blocks");
 const mine = require("./services/Mine");
 const transaction = require("./services/Transaction");
+const nodes = require("./services/Nodes");
 const events = require("./services/Events");
 
 const express = require('express');
@@ -18,6 +19,7 @@ app.get('/blocks', blocks.getBlocks);
 app.get('/mine', mine.mineBlock);
 app.get('/transaction', transaction.getForm);
 app.post('/transaction', transaction.save);
+app.post('/nodes/register', nodes.register);
 
 app.get('/events', events.createSse);
 
