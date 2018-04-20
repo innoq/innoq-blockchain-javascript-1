@@ -11,4 +11,4 @@ class Node {
     }
 }
 
-exports.nodeList = nodeList;
+exports.neighbours = neighbours;
