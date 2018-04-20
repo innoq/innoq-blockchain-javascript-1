@@ -17,4 +17,6 @@ app.get('/mine', mine.mineBlock);
 app.get('/transaction', transaction.getForm);
 app.post('/transaction', transaction.save);
 
+app.get('/events', blocks.createBlocksSSE);
+
 app.listen(3005);

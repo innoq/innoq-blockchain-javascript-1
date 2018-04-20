@@ -4,6 +4,7 @@ const transactionService = require("../services/Transaction");
 const Transaction = require("../model/transaction").Transaction;
 
 const chain  = createChain();
+let sseStream = null;
 
 function createChain() {
     return [createGenesisBlock()];
@@ -29,9 +30,14 @@ exports.nextBlockCandidate = function() {
         hashBlock(JSON.stringify(chain[chain.length - 1])),
         chain.length + 1
     );
-}
+};
 
 exports.saveBlock = function(newBlock) {
     chain.push(newBlock);
+    sseStream.sendEvent("new_block", newBlock);
     return chain;
-}
+};
+
+exports.setSseStream = (sseStreamPar) => {
+    sseStream = sseStreamPar;
+};
