@@ -10,6 +10,11 @@ const events = require("./services/Events");
 const express = require('express');
 const app = express();
 
+function getArg(argName){
+    const argDef = process.argv.filter(arg => arg.startsWith(argName + "="))[0];
+    return argDef ? argDef.split("=")[1] : null;
+}
+
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -23,6 +28,7 @@ app.post('/nodes/register', nodes.register);
 
 app.get('/events', events.createSse);
 
-const port = process.argv[2] || 3005;
+const port = getArg("port") || null;
+const neighbour = getArg("neighbour") || null;
 
 app.listen(port);
