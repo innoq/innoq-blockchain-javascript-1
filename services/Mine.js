@@ -1,9 +1,10 @@
 const hashBlock = require("../helper").hashBlock;
 const chain = require("../model/chain");
+const transactionService = require("../services/Transaction");
 
 const mineBlock = function(req, res) {
-    const blockCandidate = chain.nextBlockCandidate();
-    if (blockCandidate) {
+    if (transactionService.hasUnconfirmedTransactions()) {
+        const blockCandidate = chain.nextBlockCandidate();
 
         let newHash = null;
         let tryNumber = 0;
@@ -16,6 +17,7 @@ const mineBlock = function(req, res) {
         const elapsedTimeMillis = Date.now() - startTime;
 
         chain.saveBlock(blockCandidate);
+        transactionService.removeProcessedTransactions(blockCandidate.transactions);
         const seconds = elapsedTimeMillis / 1000
         res.send({
             "message": "Mined a new block in " + seconds + "s. Hashing power: " +  hashRate(tryNumber + 1, seconds) + " hashes/s.",

@@ -21,15 +21,11 @@ function createGenesisBlock() {
 exports.chain = chain;
 
 exports.nextBlockCandidate = function() {
-    if (transactionService.hasUnconfirmedTransactions()) {
-        return new Block(
-            transactionService.getUpToFiveTransactions(),
-            hashBlock(chain[chain.length - 1]),
-            chain.length + 1
-        );
-    } else {
-        return null;
-    }
+    return new Block(
+        transactionService.getUpToFiveTransactions(),
+        hashBlock(chain[chain.length - 1]),
+        chain.length + 1
+    );
 }
 
 exports.saveBlock = function(newBlock) {

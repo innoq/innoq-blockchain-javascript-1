@@ -1,10 +1,9 @@
 const Transaction = require("../model/transaction").Transaction;
 const transactionView = require("../views/Transactions").TransactionView;
 
-const transactionCollection = [];
+let transactionCollection = [];
 
 const getForm = function(req, res) {
-	console.log("hi", transactionView);
 	res.send(transactionView.getTransactionForm());
 }
 
@@ -29,8 +28,14 @@ const hasUnconfirmedTransactions = function() {
         .length > 0;
 }
 
+const removeProcessedTransactions = function(confirmedTransactions) {
+    console.log("Remove confirmed transactions");
+    transactionCollection = transactionCollection.filter(transaction => !confirmedTransactions.includes(transaction));
+}
+
 exports.getForm = getForm;
 exports.getUpToFiveTransactions = getUpToFiveTransactions;
 exports.hasUnconfirmedTransactions = hasUnconfirmedTransactions;
 exports.save = save;
+exports.removeProcessedTransactions = removeProcessedTransactions;
 exports.transactionCollection = transactionCollection;
