@@ -14,8 +14,9 @@ const save = function(req, res) {
 }
 
 const getUpToFiveTransactions = function() {
-    return transactionCollection.slice(0, 5)
+    return transactionCollection
         .filter(elem => elem.blockedForMiningProcess === false)
+        .slice(0, 5)
         .map(elem => {
             elem.blockedForMiningProcess = true;
             return elem.transaction;
@@ -29,8 +30,11 @@ const hasUnconfirmedTransactions = function() {
 }
 
 const removeProcessedTransactions = function(confirmedTransactions) {
-    console.log("Remove confirmed transactions");
-    transactionCollection = transactionCollection.filter(transaction => !confirmedTransactions.includes(transaction));
+    console.log("Remove confirmed transactions", confirmedTransactions.map(transaction => transaction.id).join(", "));
+    transactionCollection = transactionCollection.filter(transaction => {
+        confirmedTransactionIds = confirmedTransactions.map(trans => trans.id);
+        return !confirmedTransactionIds.includes(transaction.id);
+    });
 }
 
 exports.getForm = getForm;

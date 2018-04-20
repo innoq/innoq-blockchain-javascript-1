@@ -12,10 +12,15 @@ const mineBlock = function(req, res) {
 
         const blockCandidateString = JSON.stringify(blockCandidate);
         const firstPart = blockCandidateString.substring(0, blockCandidateString.indexOf(">!#") - 1);
+        const firstPartArrayBuffer = Buffer.from(firstPart);
         const lastPart = blockCandidateString.substring(blockCandidateString.indexOf(">!#") + 4, blockCandidateString.length);
+        const lastPartArrayBuffer = Buffer.from(lastPart);
         do {
+            const tryNumberArrayBuffer = Buffer.from(tryNumber.toString());
+            const blockCandidateArrayBuffer = Buffer.concat([firstPartArrayBuffer, tryNumberArrayBuffer, lastPartArrayBuffer]);
+            newHash = hashBlock(blockCandidateArrayBuffer);
+
             blockCandidate.proof = tryNumber;
-            newHash = hashBlock(firstPart + tryNumber + lastPart);
             tryNumber++;
         } while (newHash.substring(0,6) !== "000000");
         const elapsedTimeMillis = Date.now() - startTime;
