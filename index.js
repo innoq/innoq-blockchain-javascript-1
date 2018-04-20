@@ -3,6 +3,7 @@ const blocks = require("./services/Blocks");
 const mine = require("./services/Mine");
 const transaction = require("./services/Transaction");
 const bodyParser = require('body-parser');
+const nodes = require("./services/Nodes");
 
 const express = require('express');
 const app = express();
@@ -16,5 +17,6 @@ app.get('/blocks', blocks.getBlocks);
 app.get('/mine', mine.mineBlock);
 app.get('/transaction', transaction.getForm);
 app.post('/transaction', transaction.save);
+app.post('/nodes/register', nodes.register);
 
 app.listen(3005);
