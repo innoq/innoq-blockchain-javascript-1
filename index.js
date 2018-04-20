@@ -1,8 +1,10 @@
+const bodyParser = require('body-parser');
+
 const information = require("./services/Information");
 const blocks = require("./services/Blocks");
 const mine = require("./services/Mine");
 const transaction = require("./services/Transaction");
-const bodyParser = require('body-parser');
+const events = require("./services/Events");
 
 const express = require('express');
 const app = express();
@@ -17,6 +19,6 @@ app.get('/mine', mine.mineBlock);
 app.get('/transaction', transaction.getForm);
 app.post('/transaction', transaction.save);
 
-app.get('/events', blocks.createBlocksSSE);
+app.get('/events', events.createSse);
 
 app.listen(3005);

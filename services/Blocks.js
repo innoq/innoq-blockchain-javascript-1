@@ -1,7 +1,4 @@
-const SSE = require("sse-nodejs");
-const chainModule = require("../model/chain");
-const chain = chainModule.chain;
-const setSseStream = chainModule.setSseStream;
+const chain = require("../model/chain").chain;
 
 const getBlocks = function(req, res) {
 	res.send({
@@ -10,11 +7,4 @@ const getBlocks = function(req, res) {
 	});
 };
 
-const createBlocksSSE = function(req, res){
-    const sseStream = SSE(res);
-	setSseStream(sseStream);
-    sseStream.disconnect(() => console.log("disconnected"));
-};
-
 exports.getBlocks = getBlocks;
-exports.createBlocksSSE = createBlocksSSE;
