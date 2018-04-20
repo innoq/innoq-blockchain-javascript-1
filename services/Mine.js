@@ -22,7 +22,7 @@ const mineBlock = function(req, res) {
 
             blockCandidate.proof = tryNumber;
             tryNumber++;
-        } while (newHash.substring(0,6) !== "000000");
+        } while (newHash.substring(0,3) !== "000");
         const elapsedTimeMillis = Date.now() - startTime;
 
         chain.saveBlock(blockCandidate);
