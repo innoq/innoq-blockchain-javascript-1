@@ -8,7 +8,9 @@ const nodes = require("./services/Nodes");
 const events = require("./services/Events");
 const express = require('express');
 const app = express();
+const request = require('request');
 
+const chainModule = require("./model/chain");
 const neighboursModule = require("./model/neighbours");
 
 function getArg(argName){
@@ -30,6 +32,7 @@ app.get('/events', events.createSse);
 
 const port = getArg("port") || 3005;
 const neighbour = getArg("neighbour") || null;
+console.log("start application on port: " + port + " with first neighbour: " + neighbour);
 
 app.listen(port);
 
@@ -42,4 +45,4 @@ if (neighboursModule.neighbours.length > 0) {
         }
         chainModule.replaceChain(body.blocks);
     })
-};
+}
