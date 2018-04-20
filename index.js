@@ -19,4 +19,6 @@ app.get('/transaction', transaction.getForm);
 app.post('/transaction', transaction.save);
 app.post('/nodes/register', nodes.register);
 
+app.get('/events', blocks.createBlocksSSE);
+
 app.listen(3005);

@@ -1,9 +1,9 @@
 class Block {
-    constructor(previousBlockHash, index) {
+    constructor(transactions, previousBlockHash, index) {
         this.index = index;
         this.timestamp = Date.now();
-        this.proof = null;
-        this.transactions = [];
+        this.proof = ">!#";         // placeholder to insert proof into string during mining
+        this.transactions = transactions;
         this.previousBlockHash = previousBlockHash;
     }
 }
