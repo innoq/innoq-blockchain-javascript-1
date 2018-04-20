@@ -23,4 +23,6 @@ app.post('/nodes/register', nodes.register);
 
 app.get('/events', events.createSse);
 
-app.listen(3005);
+const port = process.argv[2] || 3005;
+
+app.listen(port);

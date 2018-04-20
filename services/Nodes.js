@@ -1,5 +1,5 @@
 const bodyParser = require("body-parser");
-const addNeighbour = require("../model/neighbours").addNeighbour
+const addNeighbour = require("../model/neighbours").addNeighbour;
 
 const register = function(req, res) {
     const nodeId = req.body.nodeId;
@@ -10,6 +10,6 @@ const register = function(req, res) {
     } else {
         res.status(400).send();
     }
-}
+};
 
 exports.register = register;
